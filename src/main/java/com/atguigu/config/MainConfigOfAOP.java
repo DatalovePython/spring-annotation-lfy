@@ -130,9 +130,19 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  *                      3 给增强器排序
  *                   2 保存当前bean在advisedBeans，表示当前bean已经被增强处理了
  *                   3 如果当前bean需要增强，创建当前 bean 代理对象 createProxy
+ *                      Object proxy = createProxy(
+ * 					        bean.getClass(), beanName, specificInterceptors, new SingletonTargetSource(bean));
  *                      1 获取所有增强器（通知方法）
+ *                          Advisor[] advisors = buildAdvisors(beanName, specificInterceptors);
  *                      2 保存在proxyFact
+ *                          proxyFactory.addAdvisors(advisors);
  *                      3 创建代理对象
+ *                          createAopProxy
+ *                          if (targetClass.isInterface() || Proxy.isProxyClass(targetClass)) {
+ * 				                return new JdkDynamicAopProxy(config);
+ *                              }
+ * 			                return new ObjenesisCglibAopProxy(config);
+ *
  *                          JdkDynamicAopProxy jdk：动态代理 有创建接口的
  *                          ObjenesisCglibAopProxy cglib：动态代理 没有创建接口的
  *                   4 给容器中返回当前组件使用了cglib增强的对象
