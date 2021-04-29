@@ -9,6 +9,7 @@ import com.atguigu.config.MainConfigOfAOP;
 import com.atguigu.service.BookService;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @author luzc
@@ -32,7 +33,7 @@ public class IOCTestAOP {
     public void test01() {
 
         MathCalculator mathCalculator = applicationContext.getBean(MathCalculator.class);
-        int div = mathCalculator.div(1, 2);
+        int div = mathCalculator.div(1, 0);
 
         applicationContext.close();
     }
